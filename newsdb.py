@@ -6,5 +6,5 @@ class NewsDatabase:
         self.db = psycopg2.connect(database='news')
         self.conn = self.db.cursor()
 
-if __name__=="__main__":
+if __name__ == "__main__":
     news_database = NewsDatabase()
