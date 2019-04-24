@@ -42,9 +42,38 @@ class NewsDatabase:
 
         posts = self.conn.fetchall()
 
+        print("\n")
+        for post in posts:
+            print("\"{}\" - {}".format(post[0], post[1]))
+
+    def get_error_percentages(self, above_percentage=1.00):
+
+        total_sub_query = "\
+            SELECT DATE(time) AS date_tt, count(*) \
+            FROM log GROUP BY date_tt"
+
+        error_sub_query = "\
+            SELECT DATE(time) as date_ss, count(*) \
+            FROM log WHERE status != '200 OK' GROUP BY date_ss"
+
+        error_percentage = "\
+            SELECT date_tt as date, error.count * 100.00 / total.count as percentage\
+            FROM ({}) AS total JOIN ({}) AS error \
+            ON date_tt = date_ss".format(total_sub_query, error_sub_query)
+
+        needed_date_error = "\
+            SELECT * FROM ({}) AS error \
+            WHERE error.percentage > {}".format(error_percentage, above_percentage)
+
+        posts = self.conn.execute(needed_date_error)
+
+        posts = self.conn.fetchall()
+
+        print("\n")
         print(posts)
 
 if __name__ == "__main__":
     news_database = NewsDatabase()
     news_database.get_popular_articles()
     news_database.get_popular_authors()
+    news_database.get_error_percentages()
