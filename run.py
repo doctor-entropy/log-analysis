@@ -1,5 +1,23 @@
 import newsdb as news
 
+def convert_datetime_to_string(dt):
+    month_string = {
+        1 : 'January',
+        2 : 'February',
+        3 : 'March',
+        4 : 'April',
+        5 : 'May',
+        6 : 'June',
+        7 : 'July',
+        8 : 'August',
+        9 : 'September',
+        10 : 'October',
+        11 : 'November',
+        12 : 'December'
+    }
+
+    return '{} {}, {}'.format(dt.day, month_string[dt.month], dt.year)
+
 def main():
 
     news_db = news.NewsDatabase()
@@ -19,7 +37,9 @@ def main():
     high_error_rate = news_db.get_error_percentages(
                                 above_percentage=1.00)
     for error in high_error_rate:
-        print("\t{} - {}% errors".format(error[0], round(error[1],1)))
+        error_rate = error[1]
+        date_time = convert_datetime_to_string(error[0])
+        print("\t{} - {}% errors".format(date_time, round(error_rate,1)))
 
     print("\nPlease run \'bash delete_views.sh\' file to delete views")
 
