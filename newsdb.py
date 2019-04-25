@@ -20,9 +20,6 @@ class NewsDatabase:
             ON (art.slug = proc.log_slug)".format(sub_query))
 
         posts = self.conn.fetchall()
-        
-        for post in posts:
-            print("\"{}\" - {} views".format(post[0], post[1]))
 
         return posts
 
@@ -42,9 +39,7 @@ class NewsDatabase:
 
         posts = self.conn.fetchall()
 
-        print("\n")
-        for post in posts:
-            print("\"{}\" - {}".format(post[0], post[1]))
+        return posts
 
     def get_error_percentages(self, above_percentage=1.00):
 
@@ -69,11 +64,4 @@ class NewsDatabase:
 
         posts = self.conn.fetchall()
 
-        print("\n")
-        print(posts)
-
-if __name__ == "__main__":
-    news_database = NewsDatabase()
-    news_database.get_popular_articles()
-    news_database.get_popular_authors()
-    news_database.get_error_percentages()
+        return posts
