@@ -1,4 +1,6 @@
+import os
 import psycopg2
+import subprocess
 
 class NewsDatabase:
 
@@ -12,19 +14,23 @@ class NewsDatabase:
 
         self.conn = self.db.cursor()
 
-    def get_popular_articles(self, limit_number=3):
+        self.conn.execute("\
+            SELECT EXISTS(SELECT * FROM information_schema.tables \
+            WHERE table_name = \'proc\')")
 
-        sub_query = "\
-            SELECT right(path, -9) as log_slug, count(*) \
-            FROM log WHERE status = '200 OK' and path != '/' \
-            GROUP BY log_slug ORDER BY count DESC"
+        proc_views_exists = self.conn.fetchone()[0]
+
+        if not proc_views_exists:
+            print("Please run \'create_views.sh\' file before running this script")
+            exit(1)
+
+    def get_popular_articles(self, limit_number=3):
 
         self.conn.execute("\
             SELECT art.title, proc.count \
             FROM articles AS art JOIN \
-            ({}) AS proc\
+            proc AS proc\
             ON (art.slug = proc.log_slug) LIMIT {}".format(
-                                                sub_query,
                                                 limit_number))
 
         posts = self.conn.fetchall()
@@ -33,17 +39,12 @@ class NewsDatabase:
 
     def get_popular_authors(self):
 
-        sub_query = "\
-            SELECT right(path, -9) as log_slug, count(*) \
-            FROM log WHERE status = '200 OK' and path != '/' \
-            GROUP BY log_slug ORDER BY count DESC"
-
         self.conn.execute("\
             SELECT authors.name as name, SUM(proc.count) as count \
             FROM authors \
             INNER JOIN articles ON (authors.id = articles.author) \
-            INNER JOIN ({}) AS proc ON (articles.slug = proc.log_slug)\
-            GROUP BY name ORDER BY count DESC".format(sub_query))
+            INNER JOIN proc AS proc ON (articles.slug = proc.log_slug)\
+            GROUP BY name ORDER BY count DESC")
 
         posts = self.conn.fetchall()
 
