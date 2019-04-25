@@ -19,7 +19,7 @@ def main():
     high_error_rate = news_db.get_error_percentages(
                                 above_percentage=1.00)
     for error in high_error_rate:
-        print("\t{} - {}% errors".format(error[0], error[1]))
+        print("\t{} - {}% errors".format(error[0], round(error[1],1)))
 
 if __name__ == '__main__':
     main()
