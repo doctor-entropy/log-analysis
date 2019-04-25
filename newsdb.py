@@ -17,7 +17,9 @@ class NewsDatabase:
             SELECT art.title, proc.count \
             FROM articles AS art JOIN \
             ({}) AS proc\
-            ON (art.slug = proc.log_slug)".format(sub_query))
+            ON (art.slug = proc.log_slug) LIMIT {}".format(
+                                                sub_query,
+                                                limit_number))
 
         posts = self.conn.fetchall()
 
