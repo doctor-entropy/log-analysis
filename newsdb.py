@@ -3,7 +3,13 @@ import psycopg2
 class NewsDatabase:
 
     def __init__(self):
-        self.db = psycopg2.connect(database='news')
+
+        try:
+            self.db = psycopg2.connect(database='news')
+        except psycopg2.OperationalError:
+            print("Can't connect to news database. Please check if the database exists")
+            exit(1)
+
         self.conn = self.db.cursor()
 
     def get_popular_articles(self, limit_number=3):
