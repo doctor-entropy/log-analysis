@@ -21,5 +21,7 @@ def main():
     for error in high_error_rate:
         print("\t{} - {}% errors".format(error[0], round(error[1],1)))
 
+    print("\nPlease run \'bash delete_views.sh\' file to delete views")
+
 if __name__ == '__main__':
     main()

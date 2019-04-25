@@ -19,7 +19,7 @@ class NewsDatabase:
         proc_views_exists = self.conn.fetchone()[0]
 
         if not proc_views_exists:
-            print("Please run \'create_views.sh\' file before running this script")
+            print("Please run \'bash create_views.sh\' file before running this script")
             exit(1)
 
     def get_popular_articles(self, limit_number=3):
