@@ -32,11 +32,10 @@ The goal is to create a reporting tool that prints out reports in plain text bas
 #### Create View
 Create the below view to help with effecient SQL processing
 
-
-   ` CREATE VIEW proc as SELECT RIGHT(path, -9) AS
-     WHERE status = '200 OK' and path != '/'
-     GROUP BY log_slug
-     ORDER BY count DESC;`
+	CREATE VIEW proc as SELECT RIGHT(path, -9) AS
+	WHERE status = '200 OK' and path != '/'
+	GROUP BY log_slug
+	ORDER BY count DESC;`
 
 #### Running the script
 * Clone this repository and `cd` into it
