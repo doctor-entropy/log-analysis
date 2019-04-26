@@ -22,7 +22,7 @@ The goal is to create a reporting tool that prints out reports in plain text bas
 
     `pip3 install psycopg2-binary`
 
-**Note: ** If you are using a VM along with the Vagrant file mentioned above, you do not have to install any of the above requirements. The VM is configured with the requirements.
+**Note:** If you are using a VM along with the Vagrant file mentioned above, you do not have to install any of the above requirements. The VM is configured with the requirements.
 
 #### Loading the dataset
 * Download the dataset (Link is provided above)
