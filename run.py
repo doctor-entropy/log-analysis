@@ -1,6 +1,7 @@
 import newsdb as news
 import helpers as hp
 
+
 def main():
 
     news_db = news.NewsDatabase()
@@ -26,6 +27,7 @@ def main():
         print("\t{} - {}% errors".format(date_time, round(error_rate, 1)))
 
     print("\nPlease run \'bash delete_views.sh\' file to delete view tables.")
+
 
 if __name__ == '__main__':
     main()

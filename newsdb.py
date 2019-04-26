@@ -1,5 +1,6 @@
 import psycopg2
 
+
 class NewsDatabase:
 
     def __init__(self):
@@ -7,7 +8,8 @@ class NewsDatabase:
         try:
             self.db = psycopg2.connect(database='news')
         except psycopg2.OperationalError:
-            print("Can't connect to \'news\' database. Please check if the database exists.")
+            print(("Can't connect to \'news\' ")
+                  ("database. Please check if the database exists."))
             exit(1)
 
         self.conn = self.db.cursor()
@@ -19,7 +21,8 @@ class NewsDatabase:
         proc_views_exists = self.conn.fetchone()[0]
 
         if not proc_views_exists:
-            print("Please run \'bash create_views.sh\' file before running this script.")
+            print(("Please run \'bash create_views.sh\' ")
+                  ("file before running this script."))
             exit(1)
 
     def get_popular_articles(self, limit_number=3):
@@ -58,13 +61,15 @@ class NewsDatabase:
             FROM log WHERE status != '200 OK' GROUP BY date_ss"
 
         error_percentage = "\
-            SELECT date_tt as date, error.count * 100.00 / total.count as percentage\
+            SELECT date_tt as date, error.count * 100.00 / total.count \
+            as percentage\
             FROM ({}) AS total JOIN ({}) AS error \
             ON date_tt = date_ss".format(total_sub_query, error_sub_query)
 
         needed_date_error = "\
             SELECT * FROM ({}) AS error \
-            WHERE error.percentage > {}".format(error_percentage, above_percentage)
+            WHERE error.percentage > {}".format(
+            error_percentage, above_percentage)
 
         posts = self.conn.execute(needed_date_error)
 
