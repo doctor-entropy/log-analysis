@@ -13,7 +13,7 @@ The goal is to create a reporting tool that prints out reports in plain text bas
 ## Running The Project
 **Optional:** You may also choose to run the project using a Virtual Machine. For instructions, [click here](https://github.com/udacity/fullstack-nanodegree-vm) (Note, they use vagrant to configure and boot your VM).
 
-####Requirements
+#### Requirements
 * PostgreSQL
 
     `sudo apt-get install postgresql postgresql-contrib`
@@ -24,12 +24,12 @@ The goal is to create a reporting tool that prints out reports in plain text bas
 
 **Note: ** If you are using a VM along with the Vagrant file mentioned above, you do not have to install any of the above requirements. The VM is configured with the requirements.
 
-####Loading the dataset
+#### Loading the dataset
 * Download the dataset (Link is provided above)
 * `cd` into the directory where you downloaded the dataset and run
     `psql -d news -f newsdata.sql`
 
-####Running the script
+#### Running the script
 * Clone this repository and `cd` into it
 
     `git clone https://github.com/doctor-entropy/log-analysis.git`
