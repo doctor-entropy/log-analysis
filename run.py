@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import newsdb as news
 import helpers as hp
 
