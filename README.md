@@ -33,7 +33,8 @@ The goal is to create a reporting tool that prints out reports in plain text bas
 * Clone this repository and `cd` into it
 
     `git clone https://github.com/doctor-entropy/log-analysis.git`
-`cd log-analysis`
+
+    `cd log-analysis`
 * Create views
 
     `bash create_views.sh` (Ensure you have the necessary permissions)
