@@ -35,7 +35,7 @@ Create the below view to help with effecient SQL processing
 	CREATE VIEW proc as SELECT RIGHT(path, -9) AS
 	WHERE status = '200 OK' and path != '/'
 	GROUP BY log_slug
-	ORDER BY count DESC;`
+	ORDER BY count DESC;
 
 #### Running the script
 * Clone this repository and `cd` into it
