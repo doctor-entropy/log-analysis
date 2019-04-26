@@ -43,14 +43,7 @@ Create the below view to help with effecient SQL processing
     `git clone https://github.com/doctor-entropy/log-analysis.git`
 
     `cd log-analysis`
-* Create views
-
-    `bash create_views.sh` (Ensure you have the necessary permissions)
 
 * Run the script
 
     `python3 run.py`
-
-* Delete views
-
-    `bash delete_views.sh`
