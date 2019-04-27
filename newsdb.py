@@ -8,8 +8,7 @@ class NewsDatabase:
         try:
             self.db = psycopg2.connect(database='news')
         except psycopg2.OperationalError:
-            print(("Can't connect to \'news\' ")
-                  ("database. Please check if the database exists."))
+            print("Please check if the \'news\' database exists.")
             exit(1)
 
         self.conn = self.db.cursor()
@@ -21,8 +20,7 @@ class NewsDatabase:
         proc_views_exists = self.conn.fetchone()[0]
 
         if not proc_views_exists:
-            print(("Please run \'bash create_views.sh\' ")
-                  ("file before running this script."))
+            print("Please create the views before running")
             exit(1)
 
     def get_popular_articles(self, limit_number=3):

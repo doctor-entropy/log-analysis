@@ -32,7 +32,8 @@ The goal is to create a reporting tool that prints out reports in plain text bas
 #### Create View
 Create the below view to help with effecient SQL processing
 
-	CREATE VIEW proc as SELECT RIGHT(path, -9) AS
+	CREATE VIEW proc AS
+	SELECT RIGHT(path, -9) AS log_slug, count(*) from log
 	WHERE status = '200 OK' and path != '/'
 	GROUP BY log_slug
 	ORDER BY count DESC;
