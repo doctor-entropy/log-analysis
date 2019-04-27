@@ -27,8 +27,6 @@ def main():
         date_time = hp.convert_datetime_to_string(error[0])
         print("\t{} - {}% errors".format(date_time, round(error_rate, 1)))
 
-    print("\nPlease run \'bash delete_views.sh\' file to delete view tables.")
-
 
 if __name__ == '__main__':
     main()
